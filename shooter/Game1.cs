@@ -18,8 +18,7 @@ namespace shooter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D texture;
-        Rectangle rectangle = new Rectangle(10, 10, 200, 200);
+        SpaceShip spaceShip;
         public Game1()
             : base()
         {

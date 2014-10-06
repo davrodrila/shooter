@@ -92,8 +92,14 @@ namespace shooter
             {
                 sentido = Sentido.Left;
             }
-            else {
+            else if (keyboardState.IsKeyDown(Keys.Right))
+            {
                 sentido = Sentido.Right;
+            } else
+            {
+                Keys[] currentKeys = keyboardState.GetPressedKeys();
+
+                sentido = Sentido.None;
             }
            return sentido;
         }

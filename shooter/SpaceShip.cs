@@ -40,7 +40,23 @@ namespace shooter
                 case Sentido.Left:
                     hitBox.X -= speed;
                     break;
-                default:
+                case Sentido.LeftDown:
+                    hitBox.X -= speed;
+                    hitBox.Y += speed;
+                    break;
+                case Sentido.LeftUp:
+                    hitBox.X -= speed;
+                    hitBox.Y -= speed;
+                    break;
+                case Sentido.RightDown:
+                    hitBox.X += speed;
+                    hitBox.Y += speed;
+                    break;
+                case Sentido.RightUp:
+                    hitBox.X += speed;
+                    hitBox.Y -= speed;
+                    break;
+                case Sentido.None:
                     break;
             }
         }
@@ -55,6 +71,11 @@ public enum Sentido
         Up,
         Down,
         Right,
-        Left
+        Left,
+        LeftUp,
+        LeftDown,
+        RightUp,
+        RightDown,
+        None
     }
 }

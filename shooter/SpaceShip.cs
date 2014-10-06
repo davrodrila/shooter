@@ -13,60 +13,40 @@ namespace shooter
         private Texture2D texture;
         private int speed = 5;
         private Rectangle hitBox;
+        private Vector2 direction;
+
+        public Vector2 Direction
+        {
+            get { return direction; }
+        }
         public Texture2D Texture
         {
             get { return texture; }
         }
-
+        public int Speed
+        {
+            get { return speed; }
+        }
         public SpaceShip(int coordX, int coordY, ContentManager content)
         {            
             texture = content.Load<Texture2D>("Sprites/ship.png");
             hitBox = new Rectangle(coordX, coordY, texture.Width, texture.Height);
+            direction = Vector2.Zero;
         }
 
-        public void mover(Sentido sentido)
+        public void move(Vector2 direction)
         {
-            switch (sentido)
-            {
-                case Sentido.Up:
-                    hitBox.Y -= speed;
-                    break;
-                case Sentido.Down:
-                    hitBox.Y += speed;
-                    break;
-                case Sentido.Right:
-                    hitBox.X += speed;
-                    break;
-                case Sentido.Left:
-                    hitBox.X -= speed;
-                    break;
-                case Sentido.LeftDown:
-                    hitBox.X -= speed;
-                    hitBox.Y += speed;
-                    break;
-                case Sentido.LeftUp:
-                    hitBox.X -= speed;
-                    hitBox.Y -= speed;
-                    break;
-                case Sentido.RightDown:
-                    hitBox.X += speed;
-                    hitBox.Y += speed;
-                    break;
-                case Sentido.RightUp:
-                    hitBox.X += speed;
-                    hitBox.Y -= speed;
-                    break;
-                case Sentido.None:
-                    break;
-            }
+            hitBox.X += (int) direction.X;
+            hitBox.Y += (int) direction.Y;
+            
         }
 
         public void Draw(SpriteBatch batch)
         {
             batch.Draw(texture, hitBox, Color.Pink);
         }
-}
-public enum Sentido
+    }
+    public enum Direction
     {
         Up,
         Down,

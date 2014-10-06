@@ -19,7 +19,7 @@ namespace shooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpaceShip spaceShip;
-        Texture2D texture;
+        
         private int spawnCoordX = 300;
         private int spawnCoordY = 300;
         public Game1()
@@ -73,35 +73,35 @@ namespace shooter
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            spaceShip.mover(obtenerSentido(Keyboard.GetState(PlayerIndex.One)));
+            spaceShip.move(obtainDirection(Keyboard.GetState()));
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
 
-        public Sentido obtenerSentido(KeyboardState keyboardState) 
+        public Vector2 obtainDirection(KeyboardState keyboardState)
         {
-            Sentido sentido;
-            if (keyboardState.IsKeyDown(Keys.Up)) {
-                sentido = Sentido.Up;
-            }
-            else if (keyboardState.IsKeyDown(Keys.Down))
+            Vector2 direction = Vector2.Zero;
+            Keys[] keys = keyboardState.GetPressedKeys();
+            foreach (Keys k in keys)
             {
-                sentido = Sentido.Down;
+                if (k == Keys.Up)
+                {
+                    direction += new Vector2(0,(spaceShip.Speed*-1));
+                }
+                else if (k == Keys.Down)
+                {
+                    direction += new Vector2(0,spaceShip.Speed);
+                }
+                else if (k == Keys.Left)
+                {
+                    direction += new Vector2((spaceShip.Speed*-1),0);
+                }
+                else if (k == Keys.Right)
+                {
+                    direction += new Vector2(spaceShip.Speed,0);
+                }
             }
-            else if (keyboardState.IsKeyDown(Keys.Left))
-            {
-                sentido = Sentido.Left;
-            }
-            else if (keyboardState.IsKeyDown(Keys.Right))
-            {
-                sentido = Sentido.Right;
-            } else
-            {
-                Keys[] currentKeys = keyboardState.GetPressedKeys();
-
-                sentido = Sentido.None;
-            }
-           return sentido;
+            return direction;
         }
 
         /// <summary>

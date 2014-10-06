@@ -26,6 +26,7 @@ namespace shooter
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            spaceShip = new SpaceShip(spawnCoordX, spawnCoordY, Content);
         }
 
         /// <summary>

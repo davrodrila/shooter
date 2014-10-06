@@ -4,46 +4,55 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-
+using Microsoft.Xna.Framework.Content;
 
 namespace shooter
 {
     class SpaceShip
     {
         private Texture2D texture;
-        private float speed=5;
-        private Rectangle hitBox; 
+        private int speed = 5;
+        private Rectangle hitBox;
         public Texture2D Texture
         {
             get { return texture; }
         }
 
-        public SpaceShip(int coordX,int coordY, GraphicsDevice graphicsDevice)
+        public SpaceShip(int coordX, int coordY, ContentManager content)
         {
-            hitBox = new Rectangle(coordX,coordY,100,100);
-            texture = new Texture2D(graphicsDevice,);
+            
+            texture = content.Load<Texture2D>("Sprites/ship");
+            hitBox = new Rectangle(coordX, coordY, texture.Width, texture.Height);
         }
 
         public void mover(Sentido sentido)
         {
             switch (sentido)
-            { 
+            {
                 case Sentido.Up:
-                    
+                    hitBox.Y -= speed;
                     break;
                 case Sentido.Down:
+                    hitBox.Y += speed;
                     break;
                 case Sentido.Right:
+                    hitBox.X += speed;
                     break;
                 case Sentido.Left:
+                    hitBox.X -= speed;
                     break;
                 default:
                     break;
             }
         }
-    }
 
-    enum Sentido
+        public void Draw(SpriteBatch batch)
+        {
+            batch.Draw(texture, hitBox, Color.Pink);
+        }
+
+    }
+enum Sentido
     {
         Up,
         Down,

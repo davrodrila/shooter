@@ -10,11 +10,17 @@ namespace shooter
 {
     class SpaceShip
     {
+        private string texture_path = "Sprites/ship";
         private Texture2D texture;
         private int speed = 5;
         private Rectangle hitBox;
         private Vector2 direction;
+        private int shootDelay = 100;
 
+        public int ShootDelay
+        {
+            get { return shootDelay; }
+        }
         public Vector2 Direction
         {
             get { return direction; }
@@ -29,7 +35,7 @@ namespace shooter
         }
         public SpaceShip(int coordX, int coordY, ContentManager content)
         {            
-            texture = content.Load<Texture2D>("Sprites/ship.png");
+            texture = content.Load<Texture2D>(texture_path);
             hitBox = new Rectangle(coordX, coordY, texture.Width, texture.Height);
             direction = Vector2.Zero;
         }
@@ -45,17 +51,10 @@ namespace shooter
         {
             batch.Draw(texture, hitBox, Color.Pink);
         }
-    }
-    public enum Direction
-    {
-        Up,
-        Down,
-        Right,
-        Left,
-        LeftUp,
-        LeftDown,
-        RightUp,
-        RightDown,
-        None
+
+        public Bullet shoot(ContentManager content)
+        {
+            return new Bullet(content,hitBox.X,hitBox.Y);
+        }
     }
 }

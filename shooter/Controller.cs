@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using System.Timers;
 #endregion
 
 namespace shooter
@@ -14,20 +15,21 @@ namespace shooter
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Game
+    public class Controller : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpaceShip spaceShip;
-        
+        List<Bullet> bullets;
+        int pushTime;
         private int spawnCoordX = 300;
         private int spawnCoordY = 300;
-        public Game1()
+        public Controller()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
+            bullets = new List<Bullet>();
         }
 
         /// <summary>
@@ -71,11 +73,45 @@ namespace shooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            CheckControls(gameTime);
+            base.Update(gameTime);
+            CheckColisions(gameTime);
+            MoveBullets(gameTime);
+        }
+
+        private void MoveBullets(GameTime gameTime)
+        {
+            foreach (Bullet b in bullets)
+            {
+                b.move(new Vector2(0.0f, (b.Speed * -1)));
+            }
+        }
+        private void CheckColisions(GameTime gameTime)
+        {
+            foreach (Bullet s in bullets)
+            {
+                
+            }
+        }
+        private void CheckControls(GameTime gameTime)
+        {
+            KeyboardState keyBoardState = Keyboard.GetState();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            spaceShip.move(obtainDirection(Keyboard.GetState()));
-            // TODO: Add your update logic here
-            base.Update(gameTime);
+            spaceShip.move(obtainDirection(keyBoardState));
+            pushTime -= gameTime.ElapsedGameTime.Milliseconds;
+            if (keyBoardState.IsKeyDown(Keys.Space))
+            {
+                if (pushTime<=0)
+                {
+                    bullets.Add(spaceShip.shoot(Content));
+                    pushTime = spaceShip.ShootDelay;
+                }
+            }
+            else
+            {
+                pushTime = 0;
+            }
         }
 
         public Vector2 obtainDirection(KeyboardState keyboardState)
@@ -113,7 +149,10 @@ namespace shooter
             GraphicsDevice.Clear(Color.Pink);
             spriteBatch.Begin();
             spaceShip.Draw(spriteBatch);
-
+            foreach(Bullet s in bullets)
+            {
+                s.Draw(spriteBatch);
+            }
             // TODO: Add your drawing code here
             spriteBatch.End();
             base.Draw(gameTime);

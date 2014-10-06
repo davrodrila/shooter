@@ -19,8 +19,8 @@ namespace shooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpaceShip spaceShip;
-        private int spawnCoordX;
-        private int spawnCoordY;
+        private int spawnCoordX = 300;
+        private int spawnCoordY = 300;
         public Game1()
             : base()
         {
@@ -96,6 +96,7 @@ namespace shooter
             }
            return sentido;
         }
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -104,7 +105,7 @@ namespace shooter
         {
             GraphicsDevice.Clear(Color.Pink);
             spriteBatch.Begin();
-            spriteBatch.Draw(texture,rectangle,Color.Purple);
+            spaceShip.Draw(spriteBatch);
             // TODO: Add your drawing code here
             spriteBatch.End();
             base.Draw(gameTime);

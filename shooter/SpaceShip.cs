@@ -19,8 +19,7 @@ namespace shooter
         }
 
         public SpaceShip(int coordX, int coordY, ContentManager content)
-        {
-            
+        {            
             texture = content.Load<Texture2D>("Sprites/ship");
             hitBox = new Rectangle(coordX, coordY, texture.Width, texture.Height);
         }
@@ -50,9 +49,8 @@ namespace shooter
         {
             batch.Draw(texture, hitBox, Color.Pink);
         }
-
-    }
-enum Sentido
+}
+public enum Sentido
     {
         Up,
         Down,

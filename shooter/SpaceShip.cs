@@ -12,8 +12,6 @@ namespace shooter
     {
         private Texture2D texture;
         private float speed=5;
-        private int coordX;
-        private int coordY;
         private Rectangle hitBox; 
         public Texture2D Texture
         {
@@ -22,8 +20,7 @@ namespace shooter
 
         public SpaceShip(int coordX,int coordY, GraphicsDevice graphicsDevice)
         {
-            this.coordX = coordX;
-            this.coordY = coordY;
+            hitBox = new Rectangle(coordX,coordY,100,100);
             texture = new Texture2D(graphicsDevice,);
         }
 
@@ -31,13 +28,14 @@ namespace shooter
         {
             switch (sentido)
             { 
-                case Sentido.Arriba:
+                case Sentido.Up:
+                    
                     break;
-                case Sentido.Abajo:
+                case Sentido.Down:
                     break;
-                case Sentido.Derecha:
+                case Sentido.Right:
                     break;
-                case Sentido.Izquierda:
+                case Sentido.Left:
                     break;
                 default:
                     break;
@@ -47,9 +45,9 @@ namespace shooter
 
     enum Sentido
     {
-        Arriba,
-        Abajo,
-        Derecha,
-        Izquierda
+        Up,
+        Down,
+        Right,
+        Left
     }
 }

@@ -19,6 +19,8 @@ namespace shooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpaceShip spaceShip;
+        private int spawnCoordX;
+        private int spawnCoordY;
         public Game1()
             : base()
         {
@@ -47,7 +49,7 @@ namespace shooter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            texture = new Texture2D(graphics.GraphicsDevice, 200, 200);
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -69,12 +71,30 @@ namespace shooter
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            spaceShip.mover(obtenerSentido(Keyboard.GetState(PlayerIndex.One)));
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
+        public Sentido obtenerSentido(KeyboardState keyboardState) 
+        {
+            Sentido sentido;
+            if (keyboardState.IsKeyDown(Keys.Up)) {
+                sentido = Sentido.Up;
+            }
+            else if (keyboardState.IsKeyDown(Keys.Down))
+            {
+                sentido = Sentido.Down;
+            }
+            else if (keyboardState.IsKeyDown(Keys.Left))
+            {
+                sentido = Sentido.Left;
+            }
+            else {
+                sentido = Sentido.Right;
+            }
+           return sentido;
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>

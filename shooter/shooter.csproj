@@ -48,12 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Sprites\ship.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="Icon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShooterContent\ShooterContent\ShooterContent.csproj">
       <Project>{6900E2D7-870A-4D45-8C9E-B9D008CA37AC}</Project>

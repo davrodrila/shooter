@@ -20,7 +20,7 @@ namespace shooter
 
         public SpaceShip(int coordX, int coordY, ContentManager content)
         {            
-            texture = content.Load<Texture2D>("Sprites/ship");
+            texture = content.Load<Texture2D>("Sprites/ship.png");
             hitBox = new Rectangle(coordX, coordY, texture.Width, texture.Height);
         }
 

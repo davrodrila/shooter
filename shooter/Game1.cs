@@ -19,6 +19,7 @@ namespace shooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpaceShip spaceShip;
+        Texture2D texture;
         private int spawnCoordX = 300;
         private int spawnCoordY = 300;
         public Game1()
@@ -26,7 +27,7 @@ namespace shooter
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            spaceShip = new SpaceShip(spawnCoordX, spawnCoordY, Content);
+            
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace shooter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            spaceShip = new SpaceShip(spawnCoordX, spawnCoordY, Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -106,6 +107,7 @@ namespace shooter
             GraphicsDevice.Clear(Color.Pink);
             spriteBatch.Begin();
             spaceShip.Draw(spriteBatch);
+
             // TODO: Add your drawing code here
             spriteBatch.End();
             base.Draw(gameTime);

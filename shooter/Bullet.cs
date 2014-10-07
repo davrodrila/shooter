@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace shooter
 {
-    class Bullet
+    class Bullet 
     {
         private string texture_path = "Sprites/shoot";
         private Texture2D texture;

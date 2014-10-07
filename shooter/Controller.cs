@@ -21,7 +21,8 @@ namespace shooter
         SpriteBatch spriteBatch;
         SpaceShip spaceShip;
         List<Bullet> bullets;
-        int pushTime;
+        int shootTime;
+        int missileTime;
         private int spawnCoordX = 300;
         private int spawnCoordY = 300;
         public Controller()
@@ -99,18 +100,32 @@ namespace shooter
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             spaceShip.move(obtainDirection(keyBoardState));
-            pushTime -= gameTime.ElapsedGameTime.Milliseconds;
+            shootTime -= gameTime.ElapsedGameTime.Milliseconds;
             if (keyBoardState.IsKeyDown(Keys.Space))
             {
-                if (pushTime<=0)
+                if (shootTime<=0)
                 {
                     bullets.Add(spaceShip.shoot(Content));
-                    pushTime = spaceShip.ShootDelay;
+                    shootTime = spaceShip.ShootDelay;
                 }
             }
             else
             {
-                pushTime = 0;
+                shootTime = 0;
+            }
+
+            missileTime -= gameTime.ElapsedGameTime.Milliseconds;
+            if (keyBoardState.IsKeyDown(Keys.Space))
+            {
+                if (missileTime <= 0)
+                {
+                    Missil m = spaceShip.shootMissil();
+                    missileTime = m.ShootDelay;
+                }
+            }
+            else
+            {
+                missileTime = 0;
             }
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using shooter.Interfaces;
 
 namespace shooter
 {
@@ -16,7 +17,7 @@ namespace shooter
         private Rectangle hitBox;
         private Vector2 direction;
         private int shootDelay = 100;
-
+        private int missileAmmunition = 4;
         public int ShootDelay
         {
             get { return shootDelay; }
@@ -55,6 +56,18 @@ namespace shooter
         public Bullet shoot(ContentManager content)
         {
             return new Bullet(content,hitBox.X,hitBox.Y);
+        }
+
+        public IMissil shootMissil()
+        {
+            if (missileAmmunition == 0)
+            {
+                return new EmptyMissil();
+            }else
+            {
+                return new StandardMissil();
+                missileAmmunition--;
+            }
         }
     }
 }

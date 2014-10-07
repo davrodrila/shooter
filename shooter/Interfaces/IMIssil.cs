@@ -8,11 +8,9 @@ namespace shooter.Interfaces
     interface IMissil
     {
 
-        public int Delay
+        int Delay
         {
             get;
         }
-
-
     }
 }

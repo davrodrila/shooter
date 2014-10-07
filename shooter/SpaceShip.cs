@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using shooter.Interfaces;
 
+
 namespace shooter
 {
     class SpaceShip
@@ -50,7 +51,7 @@ namespace shooter
 
         public void Draw(SpriteBatch batch)
         {
-            batch.Draw(texture, hitBox, Color.Pink);
+            batch.Draw(texture, hitBox,Color.Pink);
         }
 
         public Bullet shoot(ContentManager content)

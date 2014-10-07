@@ -10,7 +10,7 @@ namespace shooter
     {
         private int delay;
         
-        public int IMissil.Delay
+        int IMissil.Delay
         {
             get { return delay; }
         }

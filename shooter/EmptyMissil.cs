@@ -9,7 +9,7 @@ namespace shooter
     class EmptyMissil : IMissil
     {
         private int delay = 0;
-        public int IMissil.Delay
+        int IMissil.Delay
         {
             get { return delay; }
         }

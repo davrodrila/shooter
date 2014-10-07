@@ -37,9 +37,13 @@
   <ItemGroup>
     <Compile Include="Bullet.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="EmptyMissil.cs" />
+    <Compile Include="Interfaces\IBullet.cs" />
+    <Compile Include="Interfaces\IMIssil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpaceShip.cs" />
+    <Compile Include="StandardMissil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
